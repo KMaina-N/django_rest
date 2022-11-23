@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="test"></div>
+    TEST API
+    <script>
+        $.get('universities').done(function (data) {
+            console.log(data);
+        });
+
+        function getCookie(c_name) {
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) c_end = document.cookie.length;
+                    return unescape(document.cookie.substring(c_start, c_end));
+                }
+            }
+            return "";
+        }
+        
+        var settings = {
+            "url": "http://localhost:8000/api/universities/",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": getCookie('csrftoken')
+            },
+            "data": {
+                "name": "MKU"
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+
+
+    </script>
+    <!-- var data = {username: 'maina', last_name: 'maina', email: 'maina@kelvin.com'};
+    $.get('/api/accounts/', data).done(function(data){
+        console.log(data);
+    }); -->
+</body>
+
+</html>
